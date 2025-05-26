@@ -49,19 +49,19 @@ function draw() {
     if (gesture === "剪刀") {
       // 額頭（第10點）
       const [x, y] = keypoints[10];
-      drawCircle(x, y);
+      drawCircle(width - x, y); // 修正翻轉後的座標
     } else if (gesture === "石頭") {
       // 左右眼睛（第33點和第263點）
       const [x1, y1] = keypoints[33];
       const [x2, y2] = keypoints[263];
-      drawCircle(x1, y1);
-      drawCircle(x2, y2);
+      drawCircle(width - x1, y1); // 修正翻轉後的座標
+      drawCircle(width - x2, y2); // 修正翻轉後的座標
     } else if (gesture === "布") {
       // 左右臉頰（第234點和第454點）
       const [x1, y1] = keypoints[234];
       const [x2, y2] = keypoints[454];
-      drawCircle(x1, y1);
-      drawCircle(x2, y2);
+      drawCircle(width - x1, y1); // 修正翻轉後的座標
+      drawCircle(width - x2, y2); // 修正翻轉後的座標
     }
   } else {
     console.log("沒有臉部預測結果");
@@ -73,7 +73,7 @@ function drawCircle(x, y) {
   noFill();
   stroke(255, 0, 0);
   strokeWeight(4);
-  ellipse(width - x, y, 50, 50); // 修正翻轉後的座標
+  ellipse(x, y, 50, 50); // 繪製圓圈
 }
 
 // 辨識手勢的函式
